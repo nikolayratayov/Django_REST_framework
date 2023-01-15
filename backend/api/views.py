@@ -13,3 +13,4 @@ def api_home(request):
     if serializer.is_valid():
         instance = serializer.save()
         return Response(serializer.data)
+    return Response({'invalid': 'not good data'}, status=400)
