@@ -5,16 +5,11 @@ from django.shortcuts import get_object_or_404
 from .models import Product
 from .serializers import ProductSerializer
 from .permissions import IsStaffEditorPermission
-from api.authentication import TokenAuthentication
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    authentication_classes = [
-        authentication.SessionAuthentication,
-        TokenAuthentication
-    ]
     permission_classes = [IsStaffEditorPermission, permissions.IsAdminUser]
 
     def perform_create(self, serializer):
@@ -31,6 +26,7 @@ product_list_create_view = ProductListCreateAPIView.as_view()
 class ProductDetailAPIView(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsStaffEditorPermission, permissions.IsAdminUser]
 
 
 product_detail_view = ProductDetailAPIView.as_view()
@@ -40,6 +36,7 @@ class ProductUpdateAPIView(generics.UpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
+    permission_classes = [IsStaffEditorPermission, permissions.IsAdminUser]
 
     def perform_update(self, serializer):
         instance = serializer.save()
@@ -55,6 +52,7 @@ class ProductDeleteAPIView(generics.DestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
+    permission_classes = [IsStaffEditorPermission, permissions.IsAdminUser]
 
     def perform_destroy(self, instance):
         super().perform_destroy(instance)
