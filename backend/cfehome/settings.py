@@ -37,11 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'api',
     'products',
+    'search',
+
     'rest_framework',
     'rest_framework.authtoken',
-    'search'
+
+    'algoliasearch_django'
+
 ]
 
 MIDDLEWARE = [
@@ -137,4 +142,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 10
+}
+
+ALGOLIA = {
+    'APPLICATION_ID': 'F6F6HECZ45',
+    'API_KEY': '6162f55446d6e4531e774ec19e294728',
+    'INDEX_PREFIX': 'cfe'
 }
