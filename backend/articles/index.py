@@ -1,22 +1,24 @@
 from algoliasearch_django import AlgoliaIndex
-from .models import Product
 from algoliasearch_django.decorators import register
 
 
-@register(Product)
-class ProductIndex(AlgoliaIndex):
-    # should_index = 'is_public'
+from .models import Article
+
+
+@register(Article)
+class ArtcileIndex(AlgoliaIndex):
+    should_index = 'is_public'
     fields = [
         'title',
         'body',
-        'price',
         'user',
-        'public',
+        'publish_date',
         'path',
         'endpoint',
     ]
     settings = {
         'searchableAttributes': ['title', 'body'],
-        'attributesForFaceting': ['user', 'public']
+        'attributesForFaceting': ['user'],
+        'ranking': ['asc(publish_date)']
     }
     tags = 'get_tags_list'
