@@ -17,7 +17,15 @@ function handleLogin(event){
         'body': JSON.stringify(loginObjectData)
     }
     fetch(loginEndpoint, options)
-    .then(response => {
+    .then(response=>{
+        console.log(response)
         return response.json()
     })
+    .then(x => {
+        console.log(x)
+    })
+    .catch(err=> {
+        console.log('err', err)
+    })
+
 }
